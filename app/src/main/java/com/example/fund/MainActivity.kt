@@ -1,9 +1,11 @@
 package com.example.fund
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -14,9 +16,21 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    companion object {
+        const val FRAGMENT_TAG_FUND_LIST = "fragment_tag_fund_list"
+    }
+
+    private var fundListFragment: Fragment? = null
+    private var currentFragment: Fragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initView(savedInstanceState)
+
+    }
+
+    private fun initView(savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
@@ -30,6 +44,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        initFragment(savedInstanceState)
+    }
+
+    @SuppressLint("CommitTransaction")
+    private fun initFragment(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            fundListFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_FUND_LIST)
+        }
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        currentFragment?.let {
+            fragmentTransaction.hide(it)
+        }
+
+        if (fundListFragment == null) {
+            fundListFragment = FundListFragment()
+        }
+
+        fundListFragment?.let {
+            fragmentTransaction.add(R.id.fl_content, it, FRAGMENT_TAG_FUND_LIST)
+            currentFragment = fundListFragment
+            fragmentTransaction.show(it)
+            fragmentTransaction.commit()
+        }
     }
 
     override fun onBackPressed() {
@@ -50,9 +88,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

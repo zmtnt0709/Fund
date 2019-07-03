@@ -6,4 +6,19 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="select_time_title">选择时间</string>
+    <string name="foreign_capital_condition">外资情况</string>
+    <string name="data">日期</string>
+    <string name="select_data">点击选择日期</string>
+    <string name="hu">上证</string>
+    <string name="hu_hint">输入外资买卖数据</string>
+    <string name="shen">深证</string>
+    <string name="shen_hint">输入外资买卖数据</string>
+    <string name="total">总计</string>
+    <string name="total_hint">自动计算总计</string>
+    <string name="fund_deal">基金交易</string>
+    <string name="deal">交易额</string>
+    <string name="deal_hint">输入基金买卖数据</string>
 </resources>
