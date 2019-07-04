@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/tv_data"/>
+            app:layout_constraintBottom_toBottomOf="@id/tv_date"/>
 
     <TextView
             android:id="@+id/select_time_title"
@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-            android:id="@+id/tv_data"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -60,7 +60,7 @@
             android:id="@+id/tv_select_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/tv_data"
+            app:layout_constraintTop_toTopOf="@id/tv_date"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="20dp"
             android:gravity="right"
@@ -234,5 +234,18 @@
             android:layout_marginRight="20dp"
             android:hint="@string/deal_hint"
             android:inputType="numberSigned|numberDecimal"/>
+
+    <TextView
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="@string/save"/>
 
 </android.support.constraint.ConstraintLayout>
