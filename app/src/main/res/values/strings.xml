@@ -24,4 +24,8 @@
     <string name="fund_deal">基金交易</string>
     <string name="deal">交易额</string>
     <string name="deal_hint">输入基金买卖数据</string>
+
+    <string name="foreign_capital">外资：</string>
+    <string name="fund">基金：</string>
+    <string name="difference_value">差值：</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.fund.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -13,6 +14,7 @@ import com.example.fund.presenter.FundPresenter
 import com.example.fund.sqlite.FundDto
 import com.example.fund.util.DateUtil
 import kotlinx.android.synthetic.main.activity_add.*
+import java.lang.NumberFormatException
 
 /**
  *  Created by zhaomeng on 2019/6/21
@@ -108,6 +110,7 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
 
         val fundDto = FundDto(fundModel)
         presenter.saveDto(fundDto)
+        setResult(Activity.RESULT_OK)
         finish()
     }
 
@@ -118,9 +121,13 @@ class AddActivity : AppCompatActivity(), View.OnClickListener {
                 return
             }
 
-            val huNum = if (TextUtils.isEmpty(tv_hu_num.text)) 0F else tv_hu_num.text.toString().toFloat()
-            val ShenNum = if (TextUtils.isEmpty(tv_shen_num.text)) 0F else tv_shen_num.text.toString().toFloat()
-            tv_total_num.text = (huNum + ShenNum).toString()
+            try {
+                val huNum = if (TextUtils.isEmpty(tv_hu_num.text)) 0F else tv_hu_num.text.toString().toFloat()
+                val ShenNum = if (TextUtils.isEmpty(tv_shen_num.text)) 0F else tv_shen_num.text.toString().toFloat()
+                tv_total_num.text = String.format("%.2f", huNum + ShenNum)
+            } catch (ignore: NumberFormatException) {
+
+            }
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

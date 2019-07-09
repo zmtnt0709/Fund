@@ -1,22 +1,24 @@
-package com.example.fund
+package com.example.fund.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.fund.R
 import com.example.fund.sqlite.FundDto
 import com.example.fund.util.DateUtil
-import java.util.zip.Inflater
 
 /**
  *  Created by zhaomeng on 2019/7/4
  */
 
-class FundListAdapter(private val context: Context, private val fundList: List<FundDto>) : BaseAdapter() {
+class FundListAdapter(private val context: Context, private var fundList: List<FundDto>) : BaseAdapter() {
+
+    fun setData(list: List<FundDto>) {
+        fundList = list
+    }
 
     override fun getItem(position: Int): FundDto? {
         if (position < count) {
@@ -49,10 +51,10 @@ class FundListAdapter(private val context: Context, private val fundList: List<F
 
         getItem(position)?.let {
             viewHolder.tvDate.text = DateUtil.formatData(it.date, "yyyy.MM.dd")
-            viewHolder.tvHu.text = "${it.huNum}亿"
-            viewHolder.tvShen.text = "${it.shenNum}亿"
-            viewHolder.tvTotal.text = "${it.totalNum}亿"
-            viewHolder.tvDeal.text = "${it.dealNum}元"
+            viewHolder.tvHu.text = String.format("%.2f亿", it.huNum)
+            viewHolder.tvShen.text = String.format("%.2f亿", it.shenNum)
+            viewHolder.tvTotal.text = String.format("%.2f亿", it.totalNum)
+            viewHolder.tvDeal.text = String.format("%.0f元", it.dealNum)
         }
 
         return view!!

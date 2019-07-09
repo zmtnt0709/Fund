@@ -48,8 +48,46 @@ class FundPresenter(private val context: Context) {
 
     fun getAllFun(): List<FundDto>? {
         fundDao?.let {
-            return it.getAllBookList()
+            val result = it.getAllBookList()
+            result?.sortByDescending { item ->
+                item.date
+            }
+            return result
         }
         return null
+    }
+
+    fun getTotalForeignCapitalNum(): Float {
+        val fundList = getAllFun()
+        var result = 0f
+        fundList?.forEach {
+            result += it.totalNum
+        }
+        return result
+    }
+
+    fun getTotalFundNum(): Float {
+        val fundList = getAllFun()
+        var result = 0f
+        fundList?.forEach {
+            result += it.dealNum
+        }
+        return result
+    }
+
+    fun getDiffNum(): Float {
+        return getTotalForeignCapitalNum() / 50 - getTotalFundNum() / 1000
+    }
+
+    fun updateData() {
+        val list = getAllFun()
+
+        fundDao?.let {
+            it.delete(list)
+            list?.forEach { item ->
+                item.date = item.date / 1000 * 1000
+                it.createOrUpdate(item)
+            }
+        }
     }
 }

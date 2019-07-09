@@ -23,8 +23,8 @@ class FundDao : BaseDaoImpl<FundDto, String> {
         tableConfig
     )
 
-    fun getAllBookList(): List<FundDto>? {
-        var bookList: List<FundDto>? = null
+    fun getAllBookList(): MutableList<FundDto>? {
+        var bookList: MutableList<FundDto>? = null
         try {
             bookList = queryForAll()
         } catch (e: SQLException) {

@@ -1,6 +1,7 @@
 package com.example.fund.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -12,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.fund.fragment.FundListFragment
 import com.example.fund.R
+import com.example.fund.interf.IActivityResult
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     companion object {
         const val FRAGMENT_TAG_FUND_LIST = "fragment_tag_fund_list"
+        const val ADD_FUND = 0X01
     }
 
     private var fundListFragment: Fragment? = null
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
-            startActivity(Intent(this, AddActivity::class.java))
+            startActivityForResult(Intent(this, AddActivity::class.java), ADD_FUND)
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -125,5 +128,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ADD_FUND && resultCode == Activity.RESULT_OK) {
+            if (currentFragment is IActivityResult) {
+                (currentFragment as IActivityResult).activityResult(requestCode, resultCode, data)
+            }
+        }
     }
 }

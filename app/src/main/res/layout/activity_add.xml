@@ -14,6 +14,13 @@
             app:layout_constraintGuide_begin="20dp"
             android:orientation="vertical"/>
 
+    <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline_mid"
+            app:layout_constraintGuide_begin="200dp"
+            android:orientation="vertical"/>
+
     <View
             android:id="@+id/time_background"
             android:layout_width="0dp"
@@ -58,10 +65,11 @@
 
     <TextView
             android:id="@+id/tv_select_data"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/tv_date"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_mid"
             android:layout_marginRight="20dp"
             android:gravity="right"
             android:hint="@string/select_data"/>
@@ -108,9 +116,10 @@
 
     <EditText
             android:id="@+id/tv_hu_num"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/tv_hu"
+            app:layout_constraintStart_toStartOf="@id/guideline_mid"
             android:background="@color/white"
             android:gravity="right"
             android:textSize="13sp"
@@ -132,7 +141,7 @@
             android:id="@+id/tv_shen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:text="@string/shen"
             android:textColor="@color/greyDark"
             app:layout_constraintStart_toStartOf="@id/guideline"
@@ -140,11 +149,12 @@
 
     <EditText
             android:id="@+id/tv_shen_num"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:textSize="13sp"
             app:layout_constraintTop_toTopOf="@id/tv_shen"
+            app:layout_constraintStart_toStartOf="@id/guideline_mid"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="right"
             android:layout_marginRight="20dp"
@@ -164,7 +174,7 @@
             android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:paddingBottom="15dp"
             android:text="@string/total"
             android:textColor="@color/greyDark"
@@ -173,9 +183,10 @@
 
     <TextView
             android:id="@+id/tv_total_num"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="right"
+            app:layout_constraintStart_toStartOf="@id/guideline_mid"
             app:layout_constraintTop_toTopOf="@id/tv_total"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="20dp"
@@ -224,13 +235,14 @@
 
     <EditText
             android:id="@+id/tv_deal_num"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/tv_deal"
             android:background="@color/white"
             android:gravity="right"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_mid"
             android:layout_marginRight="20dp"
             android:hint="@string/deal_hint"
             android:inputType="numberSigned|numberDecimal"/>

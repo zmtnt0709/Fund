@@ -15,6 +15,7 @@ object DateUtil {
     fun toDateLong(picker: DatePicker): Long {
         val calendar = Calendar.getInstance()
         calendar.set(picker.year, picker.month, picker.dayOfMonth, 16, 0, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
         return calendar.timeInMillis
     }
 
